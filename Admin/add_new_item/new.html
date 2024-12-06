@@ -23,7 +23,7 @@
         <form id="product-form">
             <div class="form-group">
                 <label for="category">Product Category</label>
-                <select id="category" required>
+                <select id="category" onchange="updateVisibility(event)" required>
                     <option value="" disabled selected>Select a category</option>
                     <option value="burger">Burger</option>
                     <option value="pizza">Pizza</option>
@@ -36,6 +36,11 @@
                 <input type="text" id="name" placeholder="Enter product name" required>
             </div>
 
+            <div class="form-group hidden" id="price-container">
+                <label for="price">Product Price</label>
+                <input type="number" id="price" placeholder="Enter price" required>
+            </div>
+
             <div id="additional-sizes" class="hidden"></div>
 
             <div class="form-group hidden" id="add-size-container">
@@ -44,7 +49,8 @@
 
             <div class="form-group hidden" id="picture-container">
                 <label for="picture">Product Picture</label>
-                <input type="file" id="picture" accept="image/*" required>
+                <input type="file" id="picture" accept="image/*" multiple required>
+                <!-- <small id="file-error" style="color: red; display: none;">You can only upload a maximum of 3 pictures.</small> -->
             </div>
 
             <div class="form-group hidden" id="description-container">
@@ -57,128 +63,8 @@
     </div>
 
 
-    <!-- <script type="module" src="new.js"></script> -->
+    <script src="new.js"></script>
 
-    <script>
-        const selectedSizes = new Set();
-        const categoryDropdown = document.getElementById('category');
-        const addSizeButton = document.getElementById('add-size-btn');
     
-        // Function to update the visibility of the "Add Sizes" button
-        function updateAddSizeButtonVisibility() {
-            if (categoryDropdown.value === 'set-menu') {
-                addSizeButton.style.display = 'none'; // Hide the "Add Sizes" button
-            } else {
-                addSizeButton.style.display = 'inline'; // Show the "Add Sizes" button
-            }
-        }
-    
-        // Initial check to set the visibility of the "Add Sizes" button
-        updateAddSizeButtonVisibility();
-    
-        // Event listener for category dropdown
-        categoryDropdown.addEventListener('change', function () {
-            updateAddSizeButtonVisibility();
-        });
-    
-        addSizeButton.addEventListener('click', function () {
-            const additionalSizesContainer = document.getElementById('additional-sizes');
-    
-            // Create new size dropdown
-            const newSizeDiv = document.createElement('div');
-            newSizeDiv.classList.add('form-group');
-    
-            const newSizeLabel = document.createElement('label');
-            newSizeLabel.textContent = 'Size';
-            newSizeDiv.appendChild(newSizeLabel);
-    
-            const newSizeSelect = document.createElement('select');
-            newSizeSelect.required = true;
-    
-            const defaultOption = document.createElement('option');
-            defaultOption.value = '';
-            defaultOption.disabled = true;
-            defaultOption.selected = true;
-            defaultOption.textContent = 'Select size';
-            newSizeSelect.appendChild(defaultOption);
-    
-            // Add options for sizes
-            const sizes = ['small', 'medium', 'large'];
-            sizes.forEach(size => {
-                const option = document.createElement('option');
-                option.value = size;
-                option.textContent = size.charAt(0).toUpperCase() + size.slice(1);
-                // Disable option if it has already been selected
-                if (selectedSizes.has(size)) {
-                    option.disabled = true;
-                }
-                newSizeSelect.appendChild(option);
-            });
-    
-            newSizeDiv.appendChild(newSizeSelect);
-    
-            // Create new price input
-            const newPriceDiv = document.createElement('div');
-            newPriceDiv.classList.add('form-group');
-    
-            const newPriceLabel = document.createElement('label');
-            newPriceLabel.textContent = 'Price';
-            newPriceDiv.appendChild(newPriceLabel);
-    
-            const newPriceInput = document.createElement('input');
-            newPriceInput.type = 'number';
-            newPriceInput.placeholder = 'Enter price for selected size';
-            newPriceInput.required = true;
-            newPriceDiv.appendChild(newPriceInput);
-    
-            // Append new size dropdown and price input to the container
-            additionalSizesContainer.appendChild(newSizeDiv);
-            additionalSizesContainer.appendChild(newPriceDiv);
-    
-            // Add an event listener to the new size select to track selected sizes
-            newSizeSelect.addEventListener('change', function () {
-                const selectedValue = newSizeSelect.value;
-    
-                // If a size is selected
-                if (selectedValue) {
-                    // If the previous value was not the default, remove it from the set
-                    if (newSizeSelect.dataset.previousValue) {
-                        selectedSizes.delete(newSizeSelect.dataset.previousValue);
-                    }
-                    // Add the new selected value to the set
-                    selectedSizes.add(selectedValue);
-                    newSizeSelect.dataset.previousValue = selectedValue; // Store the current value for future reference
-    
-                    // Disable the selected option in all future dropdowns
-                    const allSelects = document.querySelectorAll('#additional-sizes select');
-                    allSelects.forEach(select => {
-                        const options = select.querySelectorAll('option');
-                        options.forEach(option => {
-                            if (selectedSizes.has(option.value)) {
-                                option.disabled = true;
-                            }
-                        });
-                    });
-                } else {
-                    // If the default option is selected, remove the previous value from the set
-                    if (newSizeSelect.dataset.previousValue) {
-                        selectedSizes.delete(newSizeSelect.dataset.previousValue);
-                        newSizeSelect.dataset.previousValue = null; // Clear the previous value
-                    }
-                }
-    
-                // Re-enable previously selected sizes in all dropdowns
-                const allSelects = document.querySelectorAll('#additional-sizes select');
-                allSelects.forEach(select => {
-                    const options = select.querySelectorAll('option');
-                    options.forEach(option => {
-                        if (!selectedSizes.has(option.value)) {
-                            option.disabled = false; // Enable the option if it's not in the selectedSizes set
-                        }
-                    });
-                });
-            });
-        });
-    </script>
 
 </html>

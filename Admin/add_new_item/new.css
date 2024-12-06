@@ -10,6 +10,10 @@ body {
     display: flex; /* Use flexbox for layout */
 }
 
+.hidden {
+    display: none; /* This will hide elements with the 'hidden' class */
+}
+
 
 
 /* Sidebar styles */
