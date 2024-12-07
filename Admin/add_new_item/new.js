@@ -1,4 +1,49 @@
 
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCw0nr36pavANVNzmmJJ-A-4ghotpMW0Ws",
+  authDomain: "resturant-qr-f1cc3.firebaseapp.com",
+  projectId: "resturant-qr-f1cc3",
+  storageBucket: "resturant-qr-f1cc3.firebasestorage.app",
+  messagingSenderId: "442207521958",
+  appId: "1:442207521958:web:49c885807801ae1798b867"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const selectedSizes = new Set();
 
 const nameContainer = document.getElementById('name-container');
@@ -17,6 +62,7 @@ function updateVisibility(event) {
     // Reset form fields
     document.getElementById('name').value = '';
     document.getElementById('price-container').value = '';
+    document.getElementById('price').value = '';
     document.getElementById('picture').value = '';
     document.getElementById('description').value = '';
     additionalSizesContainer.innerHTML = '';
@@ -64,14 +110,62 @@ categoryDropdown.addEventListener('change', function () {
 
 
 
-// Event listener for the submit button
-submitButton.addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent the default form submission
+// // Event listener for the submit button
+// submitButton.addEventListener('click', function (event) {
+//     event.preventDefault(); // Prevent the default form submission
+
+//     // Collect form data
+//     const name = document.getElementById('name').value;
+//     const price = document.getElementById('price').value;
+//     const picture = document.getElementById('picture').value;
+//     const description = document.getElementById('description').value;
+//     const selectedCategory = categoryDropdown.value;
+
+//     // Collect additional sizes and their prices
+//     const additionalSizes = [];
+//     const sizeSelects = document.querySelectorAll('#additional-sizes select');
+//     const priceInputs = document.querySelectorAll('#additional-sizes input[type="number"]');
+
+//     sizeSelects.forEach((select, index) => {
+//         const size = select.value;
+//         const price = priceInputs[index].value;
+
+//         if (size && price) {
+//             additionalSizes.push({ size, price });
+//         }
+//     });
+
+//     // Create an object to hold all the collected data
+//     const formData = {
+//         category: selectedCategory,
+//         name,
+//         price: price ? `${price} BDT` : '',
+//         picture,
+//         description,
+//         additionalSizes
+//     };
+
+//     // Log the collected data to the console
+//     console.log(formData);
+// });
+
+
+
+
+
+
+
+
+
+submitButton.addEventListener('click', async function (event) {
+    event.preventDefault();
+    
+    
 
     // Collect form data
     const name = document.getElementById('name').value;
     const price = document.getElementById('price').value;
-    const picture = document.getElementById('picture').value;
+    const picture = document.getElementById('picture').files[0]; // Get the file input
     const description = document.getElementById('description').value;
     const selectedCategory = categoryDropdown.value;
 
@@ -89,19 +183,96 @@ submitButton.addEventListener('click', function (event) {
         }
     });
 
-    // Create an object to hold all the collected data
-    const formData = {
-        category: selectedCategory,
-        name,
-        price: price ? `${price} BDT` : '',
-        picture,
-        description,
-        additionalSizes
-    };
+    // Check if an image file is uploaded
+    if (!picture) {
+        console.error('Please upload an image.');
+        return;
+    }
 
-    // Log the collected data to the console
-    console.log(formData);
+    try {
+        // Create a FormData object to send the image file
+        const formData = new FormData();
+        formData.append('key', '70ed7be6aa8eb21841cee9efeef1fd9b'); // Your imgBB API key
+        formData.append('image', picture);
+
+        // Upload image to imgBB
+        const response = await fetch('https://api.imgbb.com/1/upload', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            const imageUrl = data.data.url; // Get the uploaded image URL
+            console.log('Image uploaded successfully:', imageUrl);
+
+            // Create an object to hold all the collected data
+            const formData = {
+                category: selectedCategory,
+                name,
+                price: price ? `${price} BDT` : '',
+                picture: imageUrl, // Use the uploaded image URL
+                description,
+                additionalSizes
+            };
+
+
+
+            // Store the data in Firestore
+            try {
+                const docRef = await addDoc(collection(db, "menuItems"), formData);
+                
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            // Log the collected data to the console
+            console.log(formData);
+        } else {
+            console.error('Image upload failed:', data.error.message);
+        }
+    } catch (error) {
+        console.error('Error uploading image:', error);
+    }
+
+
+
+    alert("Product Add Successfully")
+
+    updateVisibility()
+
+
+
+
+
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
