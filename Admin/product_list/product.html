@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h2>PortBuilder Admin</h2>
+        <ul>
+            <li><a href="/Resturant_Order_QR/Admin/admin.html">Dashboard</a></li>
+            <li><a href="/Resturant_Order_QR/Admin/add_new_item/new.html">Add New Items</a></li>
+            <li><a href="#">Product List</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h1>Product List</h1>
+        </header>
+
+        <div class="filter-container">
+            <label for="categoryFilter">Filter by Category:</label>
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <!-- Categories will be populated here -->
+            </select>
+        </div>
+        
+        <div class="product-container">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>Description of Product 1</p>
+                <p>Category: <span class="product-category">Category 1</span></p>
+                <p>Price: <span class="product-price">$10.00</span></p>
+                <p>Size: <span class="product-size">Medium</span></p>
+                <div class="button-container">
+                    <button class="edit-button">Edit</button>
+                    <button class="delete-button">Delete</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+
+<!-- js part -->
+<script src="product.js" type="module"></script>
+
+</html>

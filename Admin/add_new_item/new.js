@@ -120,7 +120,7 @@ submitButton.addEventListener('click', async function (event) {
     const sizeSelects = document.querySelectorAll('#additional-sizes select');
     const priceInputs = document.querySelectorAll('#additional-sizes input[type="number"]');
     const customSizeInputs = document.querySelectorAll('#additional-sizes input[type="text"]');
-    const customPrizeInputs = document.querySelectorAll('#additional-sizes input[type="number"].custom-price');
+    const customPriceInputs = document.querySelectorAll('#additional-sizes input[type="number"].custom-price');
 
     sizeSelects.forEach((select, index) => {
         const size = select.value;
@@ -134,7 +134,7 @@ submitButton.addEventListener('click', async function (event) {
         // Check if the size is 'custom' and collect custom size info
         if (size === 'custom') {
             const customSize = customSizeInputs[index].value; // Get the custom size name
-            const customPrice = customPrizeInputs[index].value; // Get the custom size price
+            const customPrice = customPriceInputs[index].value; // Get the custom size price
             if (customSize && customPrice) {
                 additionalSizes.push({ size: customSize, price: customPrice });
             }
@@ -192,7 +192,7 @@ submitButton.addEventListener('click', async function (event) {
                 const docRef = await addDoc(collection(db, "menuItems"), finalData);
 
                 // Clear the selected sizes and re-enable all options in the dropdowns
-                selectedSizes.clear();
+                selectedSizesList.length = 0; // Clear the selected sizes list
                 const allSelects = document.querySelectorAll('#additional-sizes select');
                 allSelects.forEach(select => {
                     const options = select.querySelectorAll('option');
@@ -208,7 +208,7 @@ submitButton.addEventListener('click', async function (event) {
                 console.error("Error adding document: ", e);
             }
 
-            // alert("Product added successfully");
+            alert("Product added successfully");
             updateVisibility();
         } else {
             console.error('Image upload failed:', data.error.message);
@@ -217,20 +217,8 @@ submitButton.addEventListener('click', async function (event) {
         console.error('Error uploading image:', error);
     }
 
-
-
-
-
-    alert("Product Add Successfully")
-
-    updateVisibility()
-
-
-
-
-
-
-
+    
+    updateVisibility();
 });
 
 
