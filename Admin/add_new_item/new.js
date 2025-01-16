@@ -108,6 +108,12 @@ categoryDropdown.addEventListener('change', function () {
 submitButton.addEventListener('click', async function (event) {
     event.preventDefault();
 
+
+     // Show loading indicator
+     const loadingIndicator = document.getElementById('loading');
+     loadingIndicator.classList.remove('hidden');
+
+
     // Collect form data
     const name = document.getElementById('name').value;
     const price = document.getElementById('price').value;
@@ -128,8 +134,8 @@ submitButton.addEventListener('click', async function (event) {
 
         // If the size is not empty and has a price, add it to additionalSizes
         if (size && priceValue) {
-            additionalSizes.push({ size, price: priceValue });
-        }
+        additionalSizes.push({ size, price: priceValue? `${priceValue} BDT` : '' }); // Format price as "price BDT"
+    }
 
         // Check if the size is 'custom' and collect custom size info
         if (size === 'custom') {
@@ -207,6 +213,9 @@ submitButton.addEventListener('click', async function (event) {
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
+
+            loadingIndicator.classList.add('hidden');
+
 
             alert("Product added successfully");
             updateVisibility();

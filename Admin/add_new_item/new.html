@@ -10,7 +10,7 @@
 
 <body>
     <div class="sidebar" id="sidebar">
-        <h2>PortBuilder Admin</h2>
+        <h2>Resturant QR</h2>
         <ul>
             <li><a href="/Resturant_Order_QR/Admin/admin.html">Dashboard</a></li>
             <li><a href="#">Add New Item</a></li>
@@ -58,14 +58,16 @@
                 <label for="description">Description</label>
                 <textarea id="description" placeholder="Enter product description" required></textarea>
             </div>
+            <!-- Add this inside your body tag, preferably at the end -->
+            
 
             <button type="submit" class="hidden" id="submit-btn">Add Product</button>
         </form>
     </div>
 
-
+    <div id="loading" class="hidden">Loading...</div>
     <script type="module" src="new.js"></script>
 
-    
+
 
 </html>
