@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="hamburger-icon" id="hamburger-icon">
+                &#9776; <!-- Hamburger icon -->
+            </div>
+            <a href="http://127.0.0.1:5500/Resturant_Order_QR/UserPanel/Home/home.html">
+                <h1 class="system-name">My Online Store</h1>
+            </a>
+            <div class="cart-icon">
+                <a href="http://127.0.0.1:5500/Resturant_Order_QR/UserPanel/Cart/cart.html">Cart</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Side Drawer -->
+    <div class="side-drawer" id="side-drawer">
+        <button id="close-drawer" class="close-drawer">×</button>
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="http://127.0.0.1:5500/Resturant_Order_QR/UserPanel/Home/home.html">Home</a></li>
+            <li><a href="#">Current Order</a></li>
+            <li><a href="#">Order History</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+    </div>
+
+    <!-- Product Display -->
+    <div class="product-container">
+        <!-- Product cards will be dynamically inserted here -->
+    </div>
+
+    <script type="module" src="home.js"></script>
+</body>
+</html>

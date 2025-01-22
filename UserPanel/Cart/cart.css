@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #333; /* Navbar background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for the navbar */
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center; /* Center icons vertically */
+    margin-right: 15px; /* Space between back icon and title */
+}
+
+.back-icon img {
+    width: 24px; /* Set the width of the back icon */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.system-name {
+    flex-grow: 1; /* Allow the title to take up remaining space */
+    margin: 0; /* Remove default margin */
+}
+
+.cart-icon img {
+    width: 24px; /* Set the width of the cart icon */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.cart-container {
+    padding: 20px;
+}
+
+.cart-items {
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cart-item img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    margin-right: 20px;
+}
+
+.cart-item-details {
+    flex-grow: 1; /* Allow this section to take available space */
+    display: flex;
+    flex-direction: column; /* Stack name, category, and unit price vertically */
+}
+
+.cart-item-name {
+    font-weight: bold;
+}
+
+.cart-item-category,
+.unit-price {
+    margin-top: 5px; /* Space between name and category/unit price */
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls button {
+    margin: 0 5px;
+}
+
+.item-total {
+    margin-left: 10px; /* Space between quantity controls and total price */
+}
+
+/* Cart total section */
+.cart-total {
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-between; /* Space between total price and button */
+    align-items: center;
+}
+
+.order-button {
+    background-color: #28a745; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.order-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .cart-item {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .cart-item img {
+        margin-bottom: 10px; /* Space below the image */
+    }
+
+    .quantity-controls {
+        margin-top: 20px; /* Space above quantity controls */
+    }
+
+    .item-total{
+        flex-direction: column; /* Stack total price and button vertically */
+        align-items: flex-start;
+        margin-top: 10px; 
+    }
+    .cart-total {
+        flex-direction: column; /* Stack total price and button vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .order-button {
+        width: 100%; /* Make button full width */
+    }
+}

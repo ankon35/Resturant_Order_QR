@@ -394,3 +394,14 @@ addSizeButton.addEventListener('click', function () {
     // Update dropdown options initially
     updateDropdownOptions();
 });
+
+
+
+
+
+
+
+
+
+
+

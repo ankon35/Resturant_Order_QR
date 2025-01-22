@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="nav-icons">
+                <a href="/Resturant_Order_QR/UserPanel/Home/home.html" class="back-icon">
+                    <img src="back.png" alt="Back" /> <!-- Replace with your back icon image -->
+                </a>
+            </div>
+            <h1 class="system-name">Cart Page</h1>
+            
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        <h2>Your Cart</h2>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="cart-total">
+            <p>Total Price: $<span id="total-price">0.00</span></p>
+            <button id="order-now" class="order-button">Order Now</button>
+        </div>
+    </div>
+
+    <script type="module" src="cart.js"></script>
+</body>
+</html>

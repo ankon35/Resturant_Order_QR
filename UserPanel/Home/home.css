@@ -1,0 +1,170 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+
+.hamburger-icon {
+    font-size: 24px; /* Size of the hamburger icon */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-right: 15px; /* Space between hamburger icon and title */
+}
+
+
+
+/* Side Drawer Styles */
+.side-drawer {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hide off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: #444; /* Background color of the drawer */
+    color: white; /* Text color */
+    padding: 20px;
+    transition: left 0.3s ease; /* Smooth transition */
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+.side-drawer.open {
+    left: 0; /* Show the drawer */
+}
+
+.close-drawer {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.side-drawer ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.side-drawer ul li {
+    margin: 15px 0; /* Space between links */
+}
+
+.side-drawer ul li a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+
+
+
+.system-name {
+    font-size: 24px;
+}
+
+.cart-icon a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+/* Product container styles */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Product card styles */
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px;
+    width: calc(33.333% - 40px); /* 3 cards per row with margin */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-image {
+    max-width: 100%;
+    height: 300px;
+}
+
+.product-name {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #333;
+}
+
+.add-to-cart {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart:hover {
+    background-color: #218838;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(50% - 40px); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        width: calc(100% - 40px); /* 1 card per row */
+    }
+
+    .navbar-container {
+        flex-direction: row;
+        /* align-items: flex-start; */
+    }
+
+    .system-name {
+        font-size: 20px;
+    }
+}
